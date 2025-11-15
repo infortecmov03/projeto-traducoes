@@ -1,0 +1,58 @@
+{
+  "name": "multi-language-translations",
+  "version": "1.0.0",
+  "description": "Sistema de traduções multi-idioma para línguas nacionais de Moçambique",
+  "main": "locales/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "npx http-server -p 3000 -c-1",
+    "start": "node server.js",
+    "locales:generate": "node scripts/generate-locales.js",
+    "locales:validate": "node scripts/validate-locales.js",
+    "locales:missing": "node scripts/find-missing.js",
+    "locales:stats": "node scripts/translation-stats.js",
+    "locales:export": "node scripts/export-translations.js",
+    "locales:import": "node scripts/import-translations.js",
+    "locales:download": "node scripts/download-translations.js",
+    "deploy": "node scripts/deploy-to-github.js",
+    "github:setup": "node scripts/deploy-to-github.js",
+    "locales:download-online": "node scripts/download-translations.js --online",
+      "locales:download-real": "node scripts/download-real-translations.js",
+      "locales:download-multi": "node scripts/download-multiple-sources.js",
+    "locales:download-all-sources": "node scripts/download-multiple-sources.js",
+    "locales:download-with-api": "node scripts/download-real-translations.js --api",
+    "test": "node scripts/test-translations.js",
+    "build": "node scripts/build.js"
+  },
+  "keywords": [
+    "translations",
+    "i18n",
+    "multilingual",
+    "moçambique",
+    "xitsonga",
+    "changana",
+    "sena",
+    "ndau",
+    "lomwe",
+    "chuwabo",
+    "swahili"
+  ],
+  "author": "Fernando joana Antonio",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seu-usuario/multi-language-translations.git"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.13.2",
+    "cheerio": "^1.1.2"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+  
+}

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testador de Traduções</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .language-selector {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+
+        .language-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .lang-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            background: #f8f9fa;
+            color: #333;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .lang-btn:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+
+        .lang-btn.active {
+            background: #007bff;
+            color: white;
+            border-color: #0056b3;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .section {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #007bff;
+            font-size: 1.4rem;
+        }
+
+        .translation-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+
+        .key {
+            font-weight: 600;
+            color: #555;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .value {
+            color: #333;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .test-area {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .test-controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .test-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .test-btn {
+            padding: 12px 24px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .test-btn:hover {
+            background: #218838;
+        }
+
+        .result {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+            min-height: 60px;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .stats {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .language-buttons {
+                flex-direction: column;
+            }
+            
+            .lang-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌍 Testador de Traduções</h1>
+            <p>Selecione um idioma para visualizar todas as traduções</p>
+        </div>
+
+        <div class="language-selector">
+            <div class="language-buttons" id="languageButtons">
+                <!-- Os botões serão gerados pelo JavaScript -->
+            </div>
+        </div>
+
+        <div class="content-grid">
+            <div class="section">
+                <h2>🔐 Autenticação</h2>
+                <div id="authSection">
+                    <!-- Conteúdo gerado dinamicamente -->
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>📊 Dashboard</h2>
+                <div id="dashboardSection">
+                    <!-- Conteúdo gerado dinamicamente -->
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>📝 Formulários</h2>
+                <div id="formsSection">
+                    <!-- Conteúdo gerado dinamicamente -->
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>🛒 Comércio</h2>
+                <div id="commerceSection">
+                    <!-- Conteúdo gerado dinamicamente -->
+                </div>
+            </div>
+        </div>
+
+        <div class="content-grid">
+            <div class="section">
+                <h2>👥 Social</h2>
+                <div id="socialSection">
+                    <!-- Conteúdo gerado dinamicamente -->
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>📁 Status</h2>
+                <div id="statusSection">
+                    <!-- Conteúdo gerado dinamicamente -->
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>🎬 Mídia</h2>
+                <div id="mediaSection">
+                    <!-- Conteúdo gerado dinamicamente -->
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>❌ Erros</h2>
+                <div id="errorsSection">
+                    <!-- Conteúdo gerado dinamicamente -->
+                </div>
+            </div>
+        </div>
+
+        <div class="test-area">
+            <h2>🧪 Teste Dinâmico</h2>
+            <div class="test-controls">
+                <input type="text" class="test-input" id="testKey" 
+                       placeholder="Digite a chave (ex: auth.sign_in)" 
+                       value="auth.terms_agree">
+                <input type="text" class="test-input" id="testParams" 
+                       placeholder='Parâmetros JSON: {"terms": "Termos", "privacy": "Privacidade"}'>
+                <button class="test-btn" onclick="testTranslation()">Testar Tradução</button>
+            </div>
+            <div class="result" id="testResult">
+                Resultado aparecerá aqui...
+            </div>
+        </div>
+
+        <div class="stats">
+            <p>Idioma atual: <strong id="currentLang">Português</strong></p>
+            <p>Total de categorias: <strong>8</strong> | Total de chaves: <strong id="totalKeys">0</strong></p>
+        </div>
+    </div>
+
+    <script>
+        // Simulando o módulo de traduções (substitua pelo seu arquivo real)
+        class Translator {
+            constructor() {
+                this.currentLang = 'pt';
+                this.translations = {};
+                this.loadTranslations();
+            }
+
+            async loadTranslations() {
+                try {
+                    // Carrega todas as traduções
+                    const languages = ['pt', 'en', 'ts', 'sw', 'sn', 'nd', 'lomwe', 'chuwabo'];
+                    
+                    for (const lang of languages) {
+                        const response = await fetch(`locales/${lang}.json`);
+                        this.translations[lang] = await response.json();
+                    }
+                    
+                    this.init();
+                } catch (error) {
+                    console.error('Erro ao carregar traduções:', error);
+                    // Fallback para traduções embutidas
+                    this.loadFallbackTranslations();
+                    this.init();
+                }
+            }
+
+            loadFallbackTranslations() {
+                // Traduções de fallback para demonstração
+                this.translations = {
+                    pt: {/* suas traduções em português */},
+                    en: {/* inglês */},
+                    ts: {/* tsonga */},
+                    // ... outros idiomas
+                };
+            }
+
+            setLanguage(lang) {
+                if (this.translations[lang]) {
+                    this.currentLang = lang;
+                    this.updateUI();
+                }
+            }
+
+            t(key, params = {}) {
+                const keys = key.split('.');
+                let value = this.translations[this.currentLang];
+                
+                for (const k of keys) {
+                    value = value?.[k];
+                    if (value === undefined) break;
+                }
+                
+                // Fallback para português
+                if (value === undefined) {
+                    value = this.translations['pt'];
+                    for (const k of keys) {
+                        value = value?.[k];
+                        if (value === undefined) break;
+                    }
+                }
+                
+                if (value && typeof value === 'string') {
+                    return value.replace(/{(\w+)}/g, (match, param) => {
+                        return params[param] !== undefined ? params[param] : match;
+                    });
+                }
+                
+                return value || `[${key} não encontrada]`;
+            }
+
+            getAvailableLanguages() {
+                return [
+                    { code: 'pt', name: 'Português' },
+                    { code: 'en', name: 'English' },
+                    { code: 'ts', name: 'Xitsonga' },
+                    { code: 'sw', name: 'Swahili' },
+                    { code: 'sn', name: 'Sena' },
+                    { code: 'nd', name: 'Ndau' },
+                    { code: 'lomwe', name: 'Lomwe' },
+                    { code: 'chuwabo', name: 'Chuwabo' }
+                ];
+            }
+
+            init() {
+                this.createLanguageButtons();
+                this.updateUI();
+            }
+
+            createLanguageButtons() {
+                const container = document.getElementById('languageButtons');
+                const languages = this.getAvailableLanguages();
+                
+                container.innerHTML = languages.map(lang => `
+                    <button class="lang-btn ${lang.code === this.currentLang ? 'active' : ''}" 
+                            onclick="translator.setLanguage('${lang.code}')">
+                        ${lang.name} (${lang.code})
+                    </button>
+                `).join('');
+            }
+
+            updateUI() {
+                // Atualiza o idioma atual
+                document.getElementById('currentLang').textContent = 
+                    this.getAvailableLanguages().find(lang => lang.code === this.currentLang)?.name || this.currentLang;
+                
+                // Atualiza todas as seções
+                this.updateSection('auth', 'authSection');
+                this.updateSection('dashboard', 'dashboardSection');
+                this.updateSection('forms', 'formsSection');
+                this.updateSection('commerce', 'commerceSection');
+                this.updateSection('social', 'socialSection');
+                this.updateSection('status', 'statusSection');
+                this.updateSection('media', 'mediaSection');
+                this.updateSection('errors', 'errorsSection');
+                
+                // Atualiza botões de idioma
+                this.createLanguageButtons();
+                
+                // Atualiza estatísticas
+                this.updateStats();
+            }
+
+            updateSection(sectionKey, elementId) {
+                const section = this.translations[this.currentLang]?.[sectionKey];
+                const container = document.getElementById(elementId);
+                
+                if (!section) {
+                    container.innerHTML = '<div class="translation-item"><div class="value">Seção não encontrada</div></div>';
+                    return;
+                }
+
+                container.innerHTML = this.renderSection(section, sectionKey);
+            }
+
+            renderSection(section, prefix) {
+                let html = '';
+                
+                for (const [key, value] of Object.entries(section)) {
+                    const fullKey = `${prefix}.${key}`;
+                    
+                    if (typeof value === 'object') {
+                        html += `<div class="translation-item">
+                                    <div class="key">${fullKey}.*</div>
+                                    <div class="value">${this.renderSection(value, fullKey)}</div>
+                                 </div>`;
+                    } else {
+                        html += `<div class="translation-item">
+                                    <div class="key">${fullKey}</div>
+                                    <div class="value">${value || '[vazio]'}</div>
+                                 </div>`;
+                    }
+                }
+                
+                return html;
+            }
+
+            updateStats() {
+                // Conta o número total de chaves
+                let count = 0;
+                const countKeys = (obj) => {
+                    for (const key in obj) {
+                        if (typeof obj[key] === 'object') {
+                            countKeys(obj[key]);
+                        } else {
+                            count++;
+                        }
+                    }
+                };
+                
+                countKeys(this.translations[this.currentLang]);
+                document.getElementById('totalKeys').textContent = count;
+            }
+        }
+
+        // Função global para testar traduções
+        function testTranslation() {
+            const key = document.getElementById('testKey').value;
+            const paramsText = document.getElementById('testParams').value;
+            
+            let params = {};
+            if (paramsText) {
+                try {
+                    params = JSON.parse(paramsText);
+                } catch (e) {
+                    document.getElementById('testResult').innerHTML = 
+                        '<span style="color: red;">Erro: JSON inválido nos parâmetros</span>';
+                    return;
+                }
+            }
+            
+            const result = translator.t(key, params);
+            document.getElementById('testResult').textContent = result;
+        }
+
+        // Inicializa o tradutor quando a página carregar
+        const translator = new Translator();
+
+        // Adiciona suporte para Enter nos campos de teste
+        document.getElementById('testKey').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') testTranslation();
+        });
+        
+        document.getElementById('testParams').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') testTranslation();
+        });
+    </script>
+</body>
+</html>
